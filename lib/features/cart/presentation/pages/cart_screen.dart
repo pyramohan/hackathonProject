@@ -33,23 +33,20 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ),
-        body: Expanded(
-          child: PageView(
-            dragStartBehavior: DragStartBehavior.start,
-            controller: PageController(
-              initialPage: 1,
-              keepPage: true,
-            ),
-            children: [
-              ProductsScreen(),
-              AddressScreen(),
-            ],
-            onPageChanged: (int index) {
-              setState(() {
-
-              });
-            },
+        body: PageView(
+          controller: PageController(
+            initialPage: 1,
+            keepPage: true,
           ),
+          children: [
+            ProductsScreen(),
+            ProductsScreen(),
+          ],
+          onPageChanged: (int index) {
+            setState(() {
+
+            });
+          },
         ),
       ),
     );
