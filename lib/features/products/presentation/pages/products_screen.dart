@@ -6,7 +6,7 @@ import 'package:hackathon_project/core/api_call.dart';
 import 'package:hackathon_project/core/errors/exceptions.dart';
 import 'package:hackathon_project/core/widgets/loading_spinkit_widget.dart';
 import 'package:hackathon_project/features/cart/data/model/product_model.dart';
-import 'package:hackathon_project/features/cart/presentation/productAdapter/product_adapter.dart';
+import 'package:hackathon_project/features/products/presentation/productAdapter/product_adapter.dart';
 import 'package:hackathon_project/features/products/presentation/providers/products_provider.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
@@ -36,9 +36,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Products Screen"),
-      ),
       body: Consumer<ProductsProvider>(
         builder: (context, notifier, _) {
           List products = notifier.products;
