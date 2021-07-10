@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hackathon_project/core/constants/app_colors.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({Key key}) : super(key: key);
-
+  const PaymentScreen({Key key, this.pageController}) : super(key: key);
+  final PageController pageController;
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
 }
@@ -38,6 +38,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                     });
                   },
                   title: Text(_payments[index]),
+                  secondary: Image.asset(_images[index]),
                   // secondary: ,
                 );
               }),

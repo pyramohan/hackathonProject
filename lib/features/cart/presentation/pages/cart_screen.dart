@@ -13,12 +13,16 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
-  PageController _pageController = PageController();
+  PageController pageController = PageController(
+    initialPage: 0,
+    keepPage: true,
+  );
   List<String> names = [
     "Price Details",
     "Address",
     "Payment",
   ];
+  changeScreen(int index) {}
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,14 +38,11 @@ class _CartScreenState extends State<CartScreen> {
         ),
       ),
       body: PageView(
-        controller: PageController(
-          initialPage: 1,
-          keepPage: true,
-        ),
+        controller: pageController,
         children: [
-          ProductsScreen(),
-          AddressScreen(),
-          PaymentScreen(),
+          ProductsScreen(pageController: pageController),
+          AddressScreen(pageController: pageController),
+          PaymentScreen(pageController: pageController),
         ],
         onPageChanged: (int index) {
           setState(() {});

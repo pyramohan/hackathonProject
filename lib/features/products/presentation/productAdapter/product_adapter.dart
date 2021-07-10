@@ -8,8 +8,13 @@ import 'package:provider/provider.dart';
 
 class ProductAdapter extends StatelessWidget {
   final ProductModel singleProduct;
-
-  ProductAdapter({@required this.singleProduct});
+  final int index;
+  List<String> _images = [
+    "assets/images/pizza.jpeg",
+    "assets/images/pizza2.jpeg",
+    "assets/images/pizza3.jpeg",
+  ];
+  ProductAdapter({@required this.singleProduct, this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +36,9 @@ class ProductAdapter extends StatelessWidget {
                   ),
                 ]),
             child: Image.asset(
-              'assets/images/pizza.jpeg',
-              height: 150,
-              width: 150,
+              _images[index],
+              height: 120,
+              width: 120,
               fit: BoxFit.cover,
             ),
           ),
@@ -64,7 +69,7 @@ class ProductAdapter extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       print('remove pressed');
                     },
                     child: Icon(
@@ -77,9 +82,10 @@ class ProductAdapter extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
                       child: Text('1')),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       print('Add pressed');
-                      Provider.of<ProductsProvider>(context, listen: false).addQuantity(singleProduct.id);
+                      Provider.of<ProductsProvider>(context, listen: false)
+                          .addQuantity(singleProduct.id);
                     },
                     child: Icon(
                       Icons.add_circle_outline,

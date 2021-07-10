@@ -17,7 +17,8 @@ import 'package:provider/provider.dart';
 import '../product_theme.dart';
 
 class ProductsScreen extends StatefulWidget {
-  ProductsScreen();
+  ProductsScreen({this.pageController});
+  final PageController pageController;
 
   @override
   _ProductsScreenState createState() => _ProductsScreenState();
@@ -66,6 +67,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                     children: [
                       Expanded(
                         child: ListView.separated(
+                          physics: BouncingScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           separatorBuilder: (context, index) => Container(
                             margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
@@ -75,7 +77,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
                           itemCount: products.length,
                           itemBuilder: (BuildContext context, int i) {
                             ProductModel singleProduct = products[i];
-                            return ProductAdapter(singleProduct: singleProduct);
+                            return ProductAdapter(
+                                singleProduct: singleProduct, index: i);
                           },
                         ),
                       ),
@@ -146,6 +149,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         color: AppColors.colorPrimary,
                         onPressed: () {
                           HapticFeedback.lightImpact();
+                          widget.pageController.nextPage(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.ease);
                         },
                         child: Text(
                           "Proceed",

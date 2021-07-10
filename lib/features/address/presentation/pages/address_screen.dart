@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:hackathon_project/core/constants/app_colors.dart';
 import 'package:hackathon_project/features/address/presentation/pages/delivery_screen.dart';
 import 'package:hackathon_project/features/address/presentation/pages/takeaway_screen.dart';
 
 class AddressScreen extends StatefulWidget {
-  const AddressScreen({Key key}) : super(key: key);
-
+  const AddressScreen({Key key, this.pageController}) : super(key: key);
+  final PageController pageController;
   @override
   _AddressScreenState createState() => _AddressScreenState();
 }
@@ -37,6 +38,23 @@ class _AddressScreenState extends State<AddressScreen> {
             }),
           ),
           (_type == "Delivery") ? Delivery() : TakeAway(),
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: MaterialButton(
+              minWidth: MediaQuery.of(context).size.width,
+              height: 40,
+              color: AppColors.colorPrimary,
+              onPressed: () {
+                widget.pageController.nextPage(
+                    duration: Duration(milliseconds: 500), curve: Curves.ease);
+              },
+              child: Text(
+                "Proceed",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          )
         ],
       ),
     );
