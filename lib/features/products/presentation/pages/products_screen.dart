@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hackathon_project/core/api_call.dart';
 import 'package:hackathon_project/core/errors/exceptions.dart';
 import 'package:hackathon_project/core/widgets/loading_spinkit_widget.dart';
@@ -11,9 +12,9 @@ import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class ProductsScreen extends StatefulWidget {
-  List<ProductModel> products = [];
+import '../product_theme.dart';
 
+class ProductsScreen extends StatefulWidget {
   ProductsScreen();
 
   @override
@@ -58,23 +59,112 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 ),
               );
             } else {
-              return Column(
-                children: [
-                  Expanded(
-                    child: ListView.separated(
-                      scrollDirection: Axis.vertical,
-                      separatorBuilder: (context, index) => Container(
-                        color: Colors.black,
-                        height: 2,
-                      ),
-                      itemCount: widget.products.length,
-                      itemBuilder: (BuildContext context, int i) {
-                        ProductModel singleProduct = widget.products[i];
-                        return ProductAdapter(singleProduct: singleProduct);
-                      },
+              return Container(
+                padding: EdgeInsets.all(10),
+                child: Stack(
+                  children: [
+                    //Products
+                    Column(
+                      children: [
+                        Expanded(
+                          child: ListView.separated(
+                            scrollDirection: Axis.vertical,
+                            separatorBuilder: (context, index) => Container(
+                              margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                              color: Colors.grey,
+                              height: 1,
+                            ),
+                            itemCount: products.length,
+                            itemBuilder: (BuildContext context, int i) {
+                              ProductModel singleProduct = products[i];
+                              return ProductAdapter(
+                                  singleProduct: singleProduct);
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Column(
+                          children: [
+                            //Item Total
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Item Total'),
+                                Text(
+                                  'Rs : \u{20B9}' + '200',
+                                  style: ProductTheme.priceTextStyle,
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(
+                              height: 20,
+                            ),
+                            //Tax and others
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Tax and Others'),
+                                Text(
+                                  'Rs : \u{20B9}' + '200',
+                                  style: ProductTheme.priceTextStyle,
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(
+                              height: 20,
+                            ),
+                            Container(
+                              color: Colors.grey,
+                              height: 1,
+                            ),
+                            SizedBox(
+                              height: 20,
+                            ),
+                            //Total
+                            Row(
+                              mainAxisSize: MainAxisSize.max,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Total'),
+                                Text(
+                                  'Rs : \u{20B9}' + '200',
+                                  style: ProductTheme.totalPriceTextStyle,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+
+                        SizedBox(
+                          height: 40,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            HapticFeedback.lightImpact();
+                          },
+                          child: Container(
+                            width: double.infinity,
+                            height: 40,
+                            color: ProductTheme.proceedButtonColor,
+                            child: RaisedButton(
+                                onPressed: () {
+                                  HapticFeedback.lightImpact();
+                                },
+                                color: ProductTheme.productBackgroundColor,
+                                textColor: Colors.white,
+                                child: Text('Proceed')),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             }
           }
@@ -97,7 +187,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
     if (response.statusCode == 200) {
       print("GetProductsResponseBodySuccess" + response.body);
 
-      var eventLists = json.decode(response.body)['eventLists'] as List;
+      var eventLists = json.decode(response.body)['data'] as List;
       var mProductLists = List<ProductModel>.from(eventLists.map((e) {
         return ProductModel.fromJson(e);
       }));

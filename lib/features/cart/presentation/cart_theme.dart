@@ -19,8 +19,7 @@ class CartTheme {
   //Text
   static TextStyle nameTextStyle = TextStyle(
     fontFamily: 'RobotoCondensed',
-    fontWeight: FontWeight.bold,
-    fontSize: 25,
+    fontSize: 15,
     letterSpacing: 1.0,
     color: nameTextColor,
   );
