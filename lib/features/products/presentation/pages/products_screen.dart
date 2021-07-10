@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hackathon_project/core/api_call.dart';
+import 'package:hackathon_project/core/constants/app_colors.dart';
 import 'package:hackathon_project/core/errors/exceptions.dart';
 import 'package:hackathon_project/core/widgets/loading_spinkit_widget.dart';
 import 'package:hackathon_project/features/address/presentation/pages/address_screen.dart';
@@ -139,23 +140,18 @@ class _ProductsScreenState extends State<ProductsScreen> {
                       SizedBox(
                         height: 40,
                       ),
-                      GestureDetector(
-                        onTap: () {
+                      MaterialButton(
+                        minWidth: MediaQuery.of(context).size.width,
+                        height: 40,
+                        color: AppColors.colorPrimary,
+                        onPressed: () {
                           HapticFeedback.lightImpact();
                         },
-                        child: Container(
-                          width: double.infinity,
-                          height: 40,
-                          color: ProductTheme.proceedButtonColor,
-                          child: RaisedButton(
-                              onPressed: () {
-                                HapticFeedback.lightImpact();
-                              },
-                              color: ProductTheme.productBackgroundColor,
-                              textColor: Colors.white,
-                              child: Text('Proceed')),
+                        child: Text(
+                          "Proceed",
+                          style: TextStyle(color: Colors.white),
                         ),
-                      ),
+                      )
                     ],
                   ),
                 ],

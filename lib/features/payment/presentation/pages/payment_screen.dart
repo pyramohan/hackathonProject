@@ -45,6 +45,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
           ),
           MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
+            height: 40,
             color: AppColors.colorPrimary,
             onPressed: () {},
             child: Text(

@@ -40,7 +40,8 @@ class _CartScreenState extends State<CartScreen> {
         ),
         children: [
           ProductsScreen(),
-          AddressScreen(),
+          ProductsScreen(),
+          PaymentScreen(),
         ],
         onPageChanged: (int index) {
           setState(() {});
