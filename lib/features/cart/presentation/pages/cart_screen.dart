@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_project/features/address/presentation/pages/delivery_screen.dart';
 import 'package:hackathon_project/features/cart/data/model/product_model.dart';
 import 'package:hackathon_project/features/cart/presentation/productAdapter/product_adapter.dart';
-
-import 'address/delivery_screen.dart';
-import 'address/takeaway_screen.dart';
+import 'package:hackathon_project/features/payment/presentation/pages/payment_screen.dart';
 
 class CartScreen extends StatefulWidget {
   List<ProductModel> products = [];
@@ -33,7 +32,7 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ),
-        body: Delivery(),
+        body: PaymentScreen(),
       ),
     );
   }

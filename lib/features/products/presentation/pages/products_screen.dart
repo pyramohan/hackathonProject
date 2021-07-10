@@ -21,10 +21,8 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
-
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -88,8 +86,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
   Future<void> getProducts(BuildContext buildContext) async {
     Provider.of<ProductsProvider>(context, listen: false).setLoading(true);
 
-    Response response = await http.Client().get(
-        Uri.parse(API.baseURL + API.productList));
+    Response response =
+        await http.Client().get(Uri.parse(API.baseURL + API.productList));
 
     print("GetProductsResponseBody: " + response.body.toString());
 
@@ -104,7 +102,8 @@ class _ProductsScreenState extends State<ProductsScreen> {
         return ProductModel.fromJson(e);
       }));
 
-      Provider.of<ProductsProvider>(context, listen: false).setProducts(mProductLists);
+      Provider.of<ProductsProvider>(context, listen: false)
+          .setProducts(mProductLists);
       print('212121 mProductLists : ' + mProductLists.length.toString());
     } else if (response.statusCode == 404) {
       throw ServerException();

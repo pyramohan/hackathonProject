@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:hackathon_project/features/payment/presentation/pages/payment_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/app_colors.dart';
+import 'features/address/presentation/providers/address_provider.dart';
 import 'features/cart/presentation/pages/cart_screen.dart';
 import 'features/cart/presentation/providers/cart_provider.dart';
 import 'features/products/presentation/pages/products_screen.dart';
@@ -12,13 +14,18 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  String _initialRoute = '/productsScreen';
+  String _initialRoute = '/cartScreen';
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (BuildContext context) => ProductsProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<ProductsProvider>(
+            create: (_) => ProductsProvider()),
+        ChangeNotifierProvider<AddressProvider>(
+            create: (_) => AddressProvider()),
+      ],
       child: MaterialApp(
         theme: ThemeData(
           // fontFamily: "Avenir",
@@ -29,7 +36,7 @@ class MyApp extends StatelessWidget {
         routes: {
           '/productsScreen': (context) => ProductsScreen(),
           '/cartScreen': (context) => CartScreen(),
-          // '/loginScreen': (context) => LoginScreen(),
+          '/payment': (context) => PaymentScreen(),
         },
         title: 'Hackathon Project',
       ),
