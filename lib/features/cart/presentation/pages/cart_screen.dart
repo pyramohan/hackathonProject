@@ -4,6 +4,7 @@ import 'package:hackathon_project/features/cart/presentation/productAdapter/prod
 
 class CartScreen extends StatefulWidget {
   final List<ProductModel> products;
+
   const CartScreen({this.products});
 
   @override
@@ -21,11 +22,19 @@ class _CartScreenState extends State<CartScreen> {
         body: Column(
           children: [
             Expanded(
-              child: ListView(
+              child: ListView.separated(
                 scrollDirection: Axis.vertical,
-                children: widget.products.map((singleProduct) {
-                  return ProductAdapter(singleProduct: singleProduct);
-                }).toList(),
+                separatorBuilder: (context, index) => Container(
+                  color: Colors.black,
+                  height: 3,
+                ),
+                itemCount: widget.products.length,
+                itemBuilder: (BuildContext context, int i) {
+                  return Container(
+                    color: Colors.green,
+                    height: 100,
+                  );
+                },
               ),
             ),
           ],
