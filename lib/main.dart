@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'core/constants/app_colors.dart';
 import 'features/cart/presentation/pages/cart_screen.dart';
 import 'features/cart/presentation/providers/cart_provider.dart';
 
@@ -17,6 +18,10 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (BuildContext context) => CartProvider(),
       child: MaterialApp(
+        theme: ThemeData(
+          // fontFamily: "Avenir",
+          primaryColor: AppColors.colorPrimary,
+        ),
         debugShowCheckedModeBanner: false,
         initialRoute: _initialRoute,
         routes: {

@@ -10,12 +10,28 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  List<String> names = [
+    "Price Details",
+    "Address",
+    "Payment",
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Cart Screen"),
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text("Cart Screen"),
+              CircleAvatar(
+                child: Image.asset("assets/images/user.png"),
+              )
+            ],
+          ),
+        ),
+        body: Column(
+          children: [],
         ),
       ),
     );

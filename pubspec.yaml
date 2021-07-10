@@ -46,7 +46,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
+    - assets/images/user.png
     
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -57,11 +57,11 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
-    - family: Avenir
-      fonts:
-        - asset: fonts/Avenir-Heavy.ttf
-        - asset: fonts/Avenir-Book.ttf
+  # fonts:
+  #   - family: Avenir
+  #     fonts:
+  #       - asset: assets/fonts/Avenir-Heavy.ttf
+  #       - asset: assets/fonts/Avenir-Book.ttf
     
   #
   # For details regarding fonts from package dependencies,
