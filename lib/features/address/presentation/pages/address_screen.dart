@@ -1,13 +1,7 @@
-import 'dart:convert';
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:hackathon_project/core/api_call.dart';
-import 'package:hackathon_project/core/errors/exceptions.dart';
-import 'package:hackathon_project/features/address/data/models/address_model.dart';
-import 'package:hackathon_project/features/address/presentation/providers/address_provider.dart';
-import 'package:http/http.dart';
-import 'package:provider/provider.dart';
-import 'package:http/http.dart' as http;
+import 'package:hackathon_project/features/address/presentation/pages/delivery_screen.dart';
+import 'package:hackathon_project/features/address/presentation/pages/takeaway_screen.dart';
 
 class AddressScreen extends StatefulWidget {
   const AddressScreen({Key key}) : super(key: key);
@@ -17,22 +11,26 @@ class AddressScreen extends StatefulWidget {
 }
 
 class _AddressScreenState extends State<AddressScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
+  List<String> _types = ["Delivery", "Takeway"];
+  String _type;
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
+        Row(
+          children: List.generate(_types.length, (index) {
+            return RadioListTile(
+                value: _types[index],
+                groupValue: _type,
+                onChanged: (type) {
+                  setState(() {
+                    _type = type;
+                  });
+                });
+          }),
+        ),
+        (_type == "Delivery") ? Delivery() : TakeAway(),
       ],
     );
   }

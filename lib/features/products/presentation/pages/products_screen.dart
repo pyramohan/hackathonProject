@@ -35,138 +35,134 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<ProductsProvider>(
-        builder: (context, notifier, _) {
-          List products = notifier.products;
-          print('212121 notifier.isloading ' + notifier.isloading.toString());
-          if (notifier.isloading) {
+    return Consumer<ProductsProvider>(
+      builder: (context, notifier, _) {
+        List products = notifier.products;
+        print('212121 notifier.isloading ' + notifier.isloading.toString());
+        if (notifier.isloading) {
+          return Align(
+            alignment: Alignment.center,
+            child: LoadingSpinkitWidget(
+              spinkitColor: Colors.indigo,
+            ),
+          );
+        } else {
+          if (products.isEmpty) {
             return Align(
               alignment: Alignment.center,
-              child: LoadingSpinkitWidget(
-                spinkitColor: Colors.indigo,
+              child: Text(
+                'No History Found',
               ),
             );
           } else {
-            if (products.isEmpty) {
-              return Align(
-                alignment: Alignment.center,
-                child: Text(
-                  'No History Found',
-                ),
-              );
-            } else {
-              return Container(
-                padding: EdgeInsets.all(10),
-                child: Stack(
-                  children: [
-                    //Products
-                    Column(
-                      children: [
-                        Expanded(
-                          child: ListView.separated(
-                            scrollDirection: Axis.vertical,
-                            separatorBuilder: (context, index) => Container(
-                              margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
-                              color: Colors.grey,
-                              height: 1,
-                            ),
-                            itemCount: products.length,
-                            itemBuilder: (BuildContext context, int i) {
-                              ProductModel singleProduct = products[i];
-                              return ProductAdapter(
-                                  singleProduct: singleProduct);
-                            },
+            return Container(
+              padding: EdgeInsets.all(10),
+              child: Stack(
+                children: [
+                  //Products
+                  Column(
+                    children: [
+                      Expanded(
+                        child: ListView.separated(
+                          scrollDirection: Axis.vertical,
+                          separatorBuilder: (context, index) => Container(
+                            margin: EdgeInsets.fromLTRB(0, 15, 0, 15),
+                            color: Colors.grey,
+                            height: 1,
                           ),
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Column(
-                          children: [
-                            //Item Total
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Item Total'),
-                                Text(
-                                  'Rs : \u{20B9}' + '200',
-                                  style: ProductTheme.priceTextStyle,
-                                ),
-                              ],
-                            ),
-
-                            SizedBox(
-                              height: 20,
-                            ),
-                            //Tax and others
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Tax and Others'),
-                                Text(
-                                  'Rs : \u{20B9}' + '200',
-                                  style: ProductTheme.priceTextStyle,
-                                ),
-                              ],
-                            ),
-
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Container(
-                              color: Colors.grey,
-                              height: 1,
-                            ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            //Total
-                            Row(
-                              mainAxisSize: MainAxisSize.max,
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text('Total'),
-                                Text(
-                                  'Rs : \u{20B9}' + '200',
-                                  style: ProductTheme.totalPriceTextStyle,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-
-                        SizedBox(
-                          height: 40,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            HapticFeedback.lightImpact();
+                          itemCount: products.length,
+                          itemBuilder: (BuildContext context, int i) {
+                            ProductModel singleProduct = products[i];
+                            return ProductAdapter(singleProduct: singleProduct);
                           },
-                          child: Container(
-                            width: double.infinity,
-                            height: 40,
-                            color: ProductTheme.proceedButtonColor,
-                            child: RaisedButton(
-                                onPressed: () {
-                                  HapticFeedback.lightImpact();
-                                },
-                                color: ProductTheme.productBackgroundColor,
-                                textColor: Colors.white,
-                                child: Text('Proceed')),
-                          ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            }
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        children: [
+                          //Item Total
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Item Total'),
+                              Text(
+                                'Rs : \u{20B9}' + '200',
+                                style: ProductTheme.priceTextStyle,
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+                          //Tax and others
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Tax and Others'),
+                              Text(
+                                'Rs : \u{20B9}' + '200',
+                                style: ProductTheme.priceTextStyle,
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Container(
+                            color: Colors.grey,
+                            height: 1,
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          //Total
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text('Total'),
+                              Text(
+                                'Rs : \u{20B9}' + '200',
+                                style: ProductTheme.totalPriceTextStyle,
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: 40,
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          HapticFeedback.lightImpact();
+                        },
+                        child: Container(
+                          width: double.infinity,
+                          height: 40,
+                          color: ProductTheme.proceedButtonColor,
+                          child: RaisedButton(
+                              onPressed: () {
+                                HapticFeedback.lightImpact();
+                              },
+                              color: ProductTheme.productBackgroundColor,
+                              textColor: Colors.white,
+                              child: Text('Proceed')),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            );
           }
-        },
-      ),
+        }
+      },
     );
   }
 

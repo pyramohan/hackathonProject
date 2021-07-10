@@ -13,6 +13,7 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+  PageController _pageController = PageController();
   List<String> names = [
     "Price Details",
     "Address",
@@ -20,36 +21,28 @@ class _CartScreenState extends State<CartScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text("Cart Screen"),
-              CircleAvatar(
-                child: Image.asset("assets/images/user.png"),
-              )
-            ],
-          ),
+    return Scaffold(
+      appBar: AppBar(
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text("Cart Screen"),
+            CircleAvatar(
+              child: Image.asset("assets/images/user.png"),
+            )
+          ],
         ),
-        body: Expanded(
-          child: PageView(
-            dragStartBehavior: DragStartBehavior.start,
-            controller: PageController(
-              initialPage: 1,
-              keepPage: true,
-            ),
-            children: [
-              ProductsScreen(),
-              AddressScreen(),
-            ],
-            onPageChanged: (int index) {
-              setState(() {
-
-              });
-            },
-          ),
+      ),
+      body: Expanded(
+        child: PageView(
+          dragStartBehavior: DragStartBehavior.start,
+          controller: _pageController,
+          children: [
+            ProductsScreen(),
+          ],
+          onPageChanged: (int index) {
+            setState(() {});
+          },
         ),
       ),
     );
