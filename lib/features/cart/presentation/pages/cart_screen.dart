@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hackathon_project/features/cart/data/model/product_model.dart';
 import 'package:hackathon_project/features/cart/presentation/productAdapter/product_adapter.dart';
 
-class CartScreen extends StatefulWidget {
-  final List<ProductModel> products;
+import 'address/delivery_screen.dart';
+import 'address/takeaway_screen.dart';
 
-  const CartScreen({this.products});
+class CartScreen extends StatefulWidget {
+  List<ProductModel> products = [];
 
   @override
   _CartScreenState createState() => _CartScreenState();
@@ -32,29 +33,7 @@ class _CartScreenState extends State<CartScreen> {
             ],
           ),
         ),
-        body: Column(
-          children: [],
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: ListView.separated(
-                scrollDirection: Axis.vertical,
-                separatorBuilder: (context, index) => Container(
-                  color: Colors.black,
-                  height: 3,
-                ),
-                itemCount: widget.products.length,
-                itemBuilder: (BuildContext context, int i) {
-                  return Container(
-                    color: Colors.green,
-                    height: 100,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+        body: Delivery(),
       ),
     );
   }
