@@ -15,23 +15,30 @@ class _AddressScreenState extends State<AddressScreen> {
   String _type;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: List.generate(_types.length, (index) {
-            return RadioListTile(
-                value: _types[index],
-                groupValue: _type,
-                onChanged: (type) {
-                  setState(() {
-                    _type = type;
-                  });
-                });
-          }),
-        ),
-        (_type == "Delivery") ? Delivery() : TakeAway(),
-      ],
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: List.generate(_types.length, (index) {
+              return Expanded(
+                child: RadioListTile(
+                  value: _types[index],
+                  groupValue: _type,
+                  onChanged: (type) {
+                    setState(() {
+                      _type = type;
+                    });
+                  },
+                  title: Text(_types[index]),
+                ),
+              );
+            }),
+          ),
+          (_type == "Delivery") ? Delivery() : TakeAway(),
+        ],
+      ),
     );
   }
 }
